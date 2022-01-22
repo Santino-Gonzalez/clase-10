@@ -9,9 +9,9 @@ function updateStatus(status, typeAlert){
 }
 
 function reset(){
-    let round = 0
-    let userSequence = []
-    let machineSequence = []
+    round = 0
+    userSequence = []
+    machineSequence = []
 }
 
 function highlight($color){
