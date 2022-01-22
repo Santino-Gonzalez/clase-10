@@ -61,11 +61,72 @@ function showMachineSequence(){
     userSequence = []
     round++
     document.querySelector("#rounds").innerText = `Ronda Nº ${round}`
+    if(round === 10){
+        const $alertCongratulations = document.createElement("div")
+        $alertCongratulations.className = "alert alert-warning alert-dismissible fade show"
+        $alertCongratulations.setAttribute("role", "alert")
+        const $textCongratulations = document.createElement("strong")
+        $textCongratulations.innerText = "Felicidades! Has llegado a la ronda N°10!"
+        const $buttonClose = document.createElement("button")
+        $buttonClose.type = "button"
+        $buttonClose.className = "btn-close"
+        $buttonClose.setAttribute("data-bs-dismiss", "alert")
+        $buttonClose.setAttribute("aria-label", "Close")
+        $alertCongratulations.appendChild($textCongratulations)
+        $alertCongratulations.appendChild($buttonClose)
+        const $containerInterface = document.querySelector("#container-interface")
+        $containerInterface.appendChild($alertCongratulations)
+        $buttonClose.onclick = function(){
+            $containerInterface.removeChild($alertCongratulations)
+        }
+    }
+
+    if(round === 20){
+        const $alertCongratulations = document.createElement("div")
+        $alertCongratulations.className = "alert alert-warning alert-dismissible fade show"
+        $alertCongratulations.setAttribute("role", "alert")
+        const $textCongratulations = document.createElement("strong")
+        $textCongratulations.innerText = "Felicidades! Has llegado a la ronda N°20, pocos llegan hasta aqui."
+        const $buttonClose = document.createElement("button")
+        $buttonClose.type = "button"
+        $buttonClose.className = "btn-close"
+        $buttonClose.setAttribute("data-bs-dismiss", "alert")
+        $buttonClose.setAttribute("aria-label", "Close")
+        $alertCongratulations.appendChild($textCongratulations)
+        $alertCongratulations.appendChild($buttonClose)
+        const $containerInterface = document.querySelector("#container-interface")
+        $containerInterface.appendChild($alertCongratulations)
+        $buttonClose.onclick = function(){
+            $containerInterface.removeChild($alertCongratulations)
+        }
+    }
+
+    if(round === 30){
+        const $alertCongratulations = document.createElement("div")
+        $alertCongratulations.className = "alert alert-warning alert-dismissible fade show"
+        $alertCongratulations.setAttribute("role", "alert")
+        const $textCongratulations = document.createElement("strong")
+        $textCongratulations.innerText = "Felicidades! Has llegado a la ronda N°30! Nos vemos en la N°50😁"
+        const $buttonClose = document.createElement("button")
+        $buttonClose.type = "button"
+        $buttonClose.className = "btn-close"
+        $buttonClose.setAttribute("data-bs-dismiss", "alert")
+        $buttonClose.setAttribute("aria-label", "Close")
+        $alertCongratulations.appendChild($textCongratulations)
+        $alertCongratulations.appendChild($buttonClose)
+        const $containerInterface = document.querySelector("#container-interface")
+        $containerInterface.appendChild($alertCongratulations)
+        $buttonClose.onclick = function(){
+            $containerInterface.removeChild($alertCongratulations)
+        }
+    }
+
 }
 
 function lose(){
     updateStatus(`Has perdido! Toca "Empezar" para jugar devuelta.`, "alert alert-danger")
     blockUserClick()
+    reset()
 }
 
 function handleUserClicks(e){
