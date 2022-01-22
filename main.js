@@ -78,7 +78,7 @@ function showMachineSequence(){
     userSequence = []
     round++
     document.querySelector("#rounds").innerText = `Ronda Nº ${round}`
-    if(round === 4){
+    if(round === 10){
         const $alertCongratulations = document.createElement("div")
         $alertCongratulations.className = "alert alert-warning alert-dismissible fade show"
         $alertCongratulations.setAttribute("role", "alert")
