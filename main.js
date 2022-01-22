@@ -61,7 +61,7 @@ function showMachineSequence(){
     userSequence = []
     round++
     document.querySelector("#rounds").innerText = `Ronda Nº ${round}`
-    if(round === 10){
+    if(round === 3){
         const $alertCongratulations = document.createElement("div")
         $alertCongratulations.className = "alert alert-warning alert-dismissible fade show"
         $alertCongratulations.setAttribute("role", "alert")
@@ -79,6 +79,11 @@ function showMachineSequence(){
         $buttonClose.onclick = function(){
             $containerInterface.removeChild($alertCongratulations)
         }
+        setTimeout(function(){
+            if($alertCongratulations.parentNode === $containerInterface){
+                $containerInterface.removeChild($alertCongratulations)
+            }
+        }, 5000);
     }
 
     if(round === 20){
