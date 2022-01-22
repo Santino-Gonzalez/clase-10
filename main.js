@@ -24,6 +24,10 @@ function highlight($color){
 function blockUserClick(){
     document.querySelectorAll(".color").forEach(function($colors){
         $colors.onclick = function(){
+            document.querySelector("#status").classList.add("trembles")
+            setTimeout(function(){
+                document.querySelector("#status").classList.remove("trembles")
+            }, 175);
         }
     })
 }
@@ -61,11 +65,11 @@ function showMachineSequence(){
 
 function lose(){
     updateStatus(`Has perdido! Toca "Empezar" para jugar devuelta.`, "alert alert-danger")
+    blockUserClick()
 }
 
 function handleUserClicks(e){
     const $color = e.target
-    console.log($color)
     highlight($color)
     userSequence.push($color)
 
@@ -76,10 +80,10 @@ function handleUserClicks(e){
         return
     }
 
-     if($color.length === $machineColor){
+    if(userSequence.length === machineSequence.length){
         setTimeout(function(){
             blockUserClick()
-            handleRound
+            handleRound()
         }, 1000)
     }
 }
