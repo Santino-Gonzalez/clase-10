@@ -2,6 +2,11 @@ let round = 0
 let userSequence = []
 let machineSequence = []
 
+const sound1 = new Audio("1.mp3")
+const sound2 = new Audio("2.mp3")
+const sound3 = new Audio("3.mp3")
+const sound4 = new Audio("4.mp3")
+
 function updateStatus(status, typeAlert){
     const $statusText = document.querySelector("#status")
         $statusText.innerText = status
@@ -16,9 +21,21 @@ function reset(){
 
 function highlight($color){
     $color.style.opacity = 1
+    if($color.id === "green"){
+        sound1.play()
+    }
+    if($color.id === "red"){
+        sound2.play()
+    }
+    if($color.id === "yellow"){
+        sound3.play()
+    }
+    if($color.id === "blue"){
+        sound4.play()
+    }
     setTimeout(function(){
         $color.style.opacity = 0.5
-    }, 500)
+    }, 250)
 }
 
 function blockUserClick(){
@@ -45,10 +62,10 @@ function showMachineSequence(){
 
     machineSequence.push($colors[machineColor])
 
-    const userDelay = (machineSequence.length + 1) * 1000
+    const userDelay = (machineSequence.length + 1) * 500
 
     machineSequence.forEach(function($color, index) {
-        const msDelay = (index + 1) * 1000;
+        const msDelay = (index + 1) * 500;
         setTimeout(function() {
         highlight($color)
     }, msDelay)})
@@ -61,7 +78,7 @@ function showMachineSequence(){
     userSequence = []
     round++
     document.querySelector("#rounds").innerText = `Ronda Nº ${round}`
-    if(round === 3){
+    if(round === 4){
         const $alertCongratulations = document.createElement("div")
         $alertCongratulations.className = "alert alert-warning alert-dismissible fade show"
         $alertCongratulations.setAttribute("role", "alert")
@@ -130,6 +147,10 @@ function showMachineSequence(){
 
 function lose(){
     updateStatus(`Has perdido! Toca "Empezar" para jugar devuelta.`, "alert alert-danger")
+    document.querySelector("#status").classList.add("trembles")
+    setTimeout(function(){
+        document.querySelector("#status").classList.remove("trembles")
+    }, 175);
     blockUserClick()
     reset()
 }
