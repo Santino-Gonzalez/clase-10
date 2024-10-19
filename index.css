@@ -1,0 +1,64 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100vh;
+    background-color: rgb(1, 9, 76);
+}
+
+header h1, header h2{
+    color: rgb(200, 200, 200);
+    text-align: center;
+}
+
+.container{
+    display: grid;
+    place-items: center;
+    margin: auto
+}
+
+.colores{
+    display: flex;
+    gap: 15px;
+    max-width: 415px;
+}
+
+.col{
+    border-radius: 10px;
+}
+
+#verde{
+    height: 200px;
+    width: 200px;
+    background-color: green;
+}
+
+#rojo{
+    height: 200px;
+    width: 200px;
+    background-color: red;
+}
+
+#amarillo{
+    height: 200px;
+    width: 200px;
+    background-color: yellow;
+}
+
+#azul{
+    height: 200px;
+    width: 200px;
+    background-color: blue;
+}
+
+button{
+    margin-top: 10px;
+    width: 100px;
+    height: 25px;
+    border-radius: 5px;
+}
