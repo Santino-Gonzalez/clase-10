@@ -8,7 +8,7 @@
 
 body{
     height: 100vh;
-    background-color: rgb(1, 9, 76);
+    background-color: rgb(0, 3, 30);
 }
 
 header h1, header h2{
@@ -30,6 +30,7 @@ header h1, header h2{
 
 .col{
     border-radius: 10px;
+    opacity: 25%;
 }
 
 #verde{
