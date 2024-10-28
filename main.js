@@ -59,15 +59,24 @@ function verificarSecuencia() {
             if(e.target != colorSecuencia){
                 alert("¡Error! La secuencia es incorrecta.");
             }
+            if(secuenciaUsuario.length == secuencia.length){
+              bloquearUsuario();
+            }
         }
     });
 }
 
-//FUNCION COMPROBAR SECUENCIA
+function bloquearUsuario(){
+    colores.forEach(color => {
+        color.onclick = () => {}
+    });
+}
 
 //INICIA EL JUEGO
 document.querySelector("#empezar").onclick = () => {
-
+    bloquearUsuario();
+    generarMostrarSecuencia();
+    verificarSecuencia();
 }
 
 //RESETEA EL JUEGO
