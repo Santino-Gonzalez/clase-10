@@ -2,6 +2,7 @@
 let secuencia = [];
 let secuenciaUsuario = [];
 let puntuacion = 0;
+let mostrando;
 
 const colores = document.querySelectorAll(".col");
 const sonido1 = new Audio("sonidos/1.mp3");
@@ -12,6 +13,7 @@ const sonido4 = new Audio("sonidos/4.mp3");
 //FUNCION RESALTAR
 
 function resaltarColor(color) {
+    mostrando = true;
     color.style.opacity = "100%";
     if (color.id === "verde") {
         sonido1.play();
@@ -27,12 +29,14 @@ function resaltarColor(color) {
     }
     setTimeout(() => {
         color.style.opacity = "25%";
+        mostrando = false;
     }, 250);
 }
 
 //FUNCION GENERAR Y MOSTRAR SECUENCIA
 
 function generarMostrarSecuencia() {
+    bloquearUsuario();
     const color = Math.floor(Math.random() * colores.length);
     secuencia.push(colores[color]);
 
@@ -43,8 +47,10 @@ function generarMostrarSecuencia() {
             resaltarColor(color);
         }, delay);
     });
-
-    verificarSecuencia();
+    
+    setTimeout(() => {
+        verificarSecuencia();
+    }, secuencia.length * 500);
 }
 
 //FUNCION TURNO DEL JUGADOR
@@ -59,9 +65,9 @@ function verificarSecuencia() {
             let colorSecuencia = secuencia[secuenciaUsuario.length - 1];
 
             if (e.target != colorSecuencia) {
-                alert("¡Error! La secuencia es incorrecta.");
-            }
-            if (secuenciaUsuario.length == secuencia.length) {
+                bloquearUsuario();
+                alert("Perdiste!")
+            }else if (secuenciaUsuario.length == secuencia.length) {
                 setTimeout(() => {
                     pasarRonda();
                 }, 300);
@@ -82,15 +88,25 @@ function pasarRonda() {
     secuenciaUsuario = [];
     generarMostrarSecuencia();
     puntuacion++;
-    document.querySelector("#score").innerHTML = "Score: " + puntuacion
+    document.querySelector("#score").innerHTML = "Score: " + puntuacion;
 }
 
 //INICIA EL JUEGO
 document.querySelector("#empezar").onclick = () => {
     generarMostrarSecuencia();
+    document.querySelector("#empezar").disabled = true;
 }
 
 //RESETEA EL JUEGO
-document.querySelector("#resetear").onclick = () => {
+function reset() {
+    bloquearUsuario();
+    secuencia = [];
+    secuenciaUsuario = [];
+    puntuacion = 0;
+    document.querySelector("#score").innerHTML = "Score: " + puntuacion;
+}
 
+document.querySelector("#resetear").onclick = () => {
+    reset();
+    document.querySelector("#empezar").disabled = false;
 }
