@@ -1,6 +1,7 @@
 //VARIABLES
 let secuencia = [];
 let secuenciaUsuario = [];
+let puntuacion = 0;
 
 const colores = document.querySelectorAll(".col");
 const sonido1 = new Audio("sonidos/1.mp3");
@@ -32,7 +33,6 @@ function resaltarColor(color) {
 //FUNCION GENERAR Y MOSTRAR SECUENCIA
 
 function generarMostrarSecuencia() {
-    secuenciaUsuario = [];
     const color = Math.floor(Math.random() * colores.length);
     secuencia.push(colores[color]);
 
@@ -43,6 +43,8 @@ function generarMostrarSecuencia() {
             resaltarColor(color);
         }, delay);
     });
+
+    verificarSecuencia();
 }
 
 //FUNCION TURNO DEL JUGADOR
@@ -52,31 +54,40 @@ function verificarSecuencia() {
         color.onclick = (e) => {
             let colorUsuario = e.target;
             resaltarColor(colorUsuario);
-            
+
             secuenciaUsuario.push(e.target);
             let colorSecuencia = secuencia[secuenciaUsuario.length - 1];
 
-            if(e.target != colorSecuencia){
+            if (e.target != colorSecuencia) {
                 alert("¡Error! La secuencia es incorrecta.");
             }
-            if(secuenciaUsuario.length == secuencia.length){
-              bloquearUsuario();
+            if (secuenciaUsuario.length == secuencia.length) {
+                setTimeout(() => {
+                    pasarRonda();
+                }, 300);
             }
         }
     });
 }
 
-function bloquearUsuario(){
+function bloquearUsuario() {
     colores.forEach(color => {
-        color.onclick = () => {}
+        color.onclick = () => { }
     });
+}
+
+//CAMBIAR RONDAS
+
+function pasarRonda() {
+    secuenciaUsuario = [];
+    generarMostrarSecuencia();
+    puntuacion++;
+    document.querySelector("#score").innerHTML = "Score: " + puntuacion
 }
 
 //INICIA EL JUEGO
 document.querySelector("#empezar").onclick = () => {
-    bloquearUsuario();
     generarMostrarSecuencia();
-    verificarSecuencia();
 }
 
 //RESETEA EL JUEGO
